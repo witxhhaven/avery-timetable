@@ -4,6 +4,7 @@ import WeekBadge from './components/WeekBadge'
 import Navigation from './components/Navigation'
 import Schedule from './components/Schedule'
 import EditWeekDialog from './components/EditWeekDialog'
+import { defaultConfig } from './defaultConfig'
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -32,7 +33,16 @@ function App() {
       setConfig(data)
       setIsLoading(false)
     } catch (error) {
-      console.error('Error loading config:', error)
+      console.error('Error loading config from API, using localStorage fallback:', error)
+      // Fallback to localStorage for GitHub Pages
+      const savedConfig = localStorage.getItem('calendar-config')
+      if (savedConfig) {
+        setConfig(JSON.parse(savedConfig))
+      } else {
+        // Use default config if nothing is saved
+        setConfig(defaultConfig)
+        localStorage.setItem('calendar-config', JSON.stringify(defaultConfig))
+      }
       setIsLoading(false)
     }
   }
@@ -87,7 +97,12 @@ function App() {
       setWeekType(newWeekType)
       setIsDialogOpen(false)
     } catch (error) {
-      console.error('Error saving config:', error)
+      console.error('Error saving config to API, using localStorage fallback:', error)
+      // Fallback to localStorage for GitHub Pages
+      localStorage.setItem('calendar-config', JSON.stringify(updatedConfig))
+      setConfig(updatedConfig)
+      setWeekType(newWeekType)
+      setIsDialogOpen(false)
     }
   }
 
