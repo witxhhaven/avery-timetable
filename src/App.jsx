@@ -48,12 +48,23 @@ function App() {
   }
 
   const calculateWeekType = (date, weekSettings) => {
-    const referenceDate = new Date(weekSettings.referenceDate)
-    const diffTime = Math.abs(date - referenceDate)
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-    const weeksPassed = Math.floor(diffDays / 7)
+    // Get the start of the week (Sunday) for both dates
+    const getWeekStart = (d) => {
+      const date = new Date(d)
+      const day = date.getDay()
+      const diff = date.getDate() - day
+      return new Date(date.setDate(diff))
+    }
 
-    if (weeksPassed % 2 === 0) {
+    const currentWeekStart = getWeekStart(date)
+    const referenceWeekStart = getWeekStart(new Date(weekSettings.referenceDate))
+
+    // Calculate weeks difference
+    const diffTime = currentWeekStart - referenceWeekStart
+    const diffWeeks = Math.round(diffTime / (7 * 24 * 60 * 60 * 1000))
+
+    // If even number of weeks passed, same type; if odd, opposite type
+    if (Math.abs(diffWeeks) % 2 === 0) {
       return weekSettings.weekType
     } else {
       return weekSettings.weekType === 'even' ? 'odd' : 'even'
@@ -177,6 +188,7 @@ function App() {
             <Schedule
               schedule={getScheduleForDay()}
               dayOfWeek={getDayOfWeek(currentDate)}
+              currentDate={currentDate}
             />
           </div>
         </div>

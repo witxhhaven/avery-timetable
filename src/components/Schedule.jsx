@@ -1,4 +1,17 @@
-function Schedule({ schedule, dayOfWeek }) {
+import motivationalMessages from '../motivationalMessages.json'
+
+function Schedule({ schedule, dayOfWeek, currentDate }) {
+  // Calculate day of year
+  const getDayOfYear = (date) => {
+    const start = new Date(date.getFullYear(), 0, 0)
+    const diff = date - start
+    const oneDay = 1000 * 60 * 60 * 24
+    return Math.floor(diff / oneDay)
+  }
+
+  const dayOfYear = getDayOfYear(currentDate)
+  const messageIndex = dayOfYear % 50
+  const dailyMessage = motivationalMessages[messageIndex]
   // Weekend handling
   if (!schedule) {
     return (
@@ -67,8 +80,8 @@ function Schedule({ schedule, dayOfWeek }) {
 
       {/* Footer encouragement */}
       <div className="mt-6 pt-6 border-t-2 border-warm-peach/30 text-center">
-        <p className="text-lg font-display text-gray-600">
-          You've got this! 💪 Have a great day!
+        <p className="text-base md:text-lg font-display text-gray-600">
+          {dailyMessage}
         </p>
       </div>
     </div>

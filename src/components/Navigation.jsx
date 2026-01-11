@@ -15,7 +15,7 @@ function Navigation({ onPrevious, onNext, onToday }) {
 
       <button
         onClick={onToday}
-        className="btn-warm px-4 md:px-8 text-sm md:text-base bg-gradient-to-r from-warm-coral to-warm-sunset text-white hover:from-warm-sunset hover:to-warm-coral"
+        className="btn-warm px-4 md:px-8 text-sm md:text-base border-2 border-warm-coral hover:border-warm-sunset"
       >
         <span className="mr-1 md:mr-2">🏠</span>
         Today
