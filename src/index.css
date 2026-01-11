@@ -33,21 +33,23 @@
 
 @layer components {
   .btn-warm {
-    @apply px-6 py-3 rounded-full font-body font-semibold transition-all duration-300;
+    @apply px-4 md:px-6 py-2 md:py-3 rounded-full font-body font-semibold transition-all duration-300;
     @apply bg-white hover:bg-warm-coral hover:text-white shadow-soft hover:shadow-warm;
     @apply transform hover:scale-105 active:scale-95;
   }
 
   .badge-even {
     @apply bg-gradient-to-r from-warm-coral to-warm-sunset text-white;
-    @apply px-6 py-3 rounded-full font-display font-semibold shadow-warm;
+    @apply px-4 md:px-6 py-2 md:py-3 rounded-full font-display font-semibold shadow-warm;
     @apply cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply text-sm md:text-base;
   }
 
   .badge-odd {
     @apply bg-gradient-to-r from-warm-amber to-warm-honey text-gray-800;
-    @apply px-6 py-3 rounded-full font-display font-semibold shadow-warm;
+    @apply px-4 md:px-6 py-2 md:py-3 rounded-full font-display font-semibold shadow-warm;
     @apply cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply text-sm md:text-base;
   }
 
   .schedule-item {
@@ -56,7 +58,7 @@
   }
 
   .date-card {
-    @apply bg-white/80 backdrop-blur-md rounded-3xl p-12 shadow-warm;
+    @apply bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-12 shadow-warm;
     @apply border-4 border-warm-peach/40;
   }
 }

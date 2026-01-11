@@ -136,19 +136,19 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen p-8">
-      {/* Decorative elements */}
-      <div className="fixed top-10 right-10 text-6xl opacity-20 animate-float">🌅</div>
-      <div className="fixed bottom-10 left-10 text-6xl opacity-20 animate-float" style={{ animationDelay: '1s' }}>📚</div>
-      <div className="fixed top-1/2 left-10 text-5xl opacity-20 animate-float" style={{ animationDelay: '2s' }}>⭐</div>
+    <div className="min-h-screen p-4 md:p-8">
+      {/* Decorative elements - hidden on mobile */}
+      <div className="hidden md:block fixed top-10 right-10 text-6xl opacity-20 animate-float">🌅</div>
+      <div className="hidden md:block fixed bottom-10 left-10 text-6xl opacity-20 animate-float" style={{ animationDelay: '1s' }}>📚</div>
+      <div className="hidden md:block fixed top-1/2 left-10 text-5xl opacity-20 animate-float" style={{ animationDelay: '2s' }}>⭐</div>
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 animate-slide-up">
-          <h1 className="text-5xl font-display font-bold text-gradient-warm mb-2">
+        <div className="text-center mb-6 md:mb-8 animate-slide-up">
+          <h1 className="text-3xl md:text-5xl font-display font-bold text-gradient-warm mb-2">
             My School Calendar
           </h1>
-          <p className="text-lg font-body text-gray-600">Your daily schedule, made friendly!</p>
+          <p className="text-base md:text-lg font-body text-gray-600">Your daily schedule, made friendly!</p>
         </div>
 
         {/* Navigation */}
@@ -158,13 +158,13 @@ function App() {
           onToday={handleToday}
         />
 
-        {/* Main Content - Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
-          {/* Left Column - Date Display */}
+        {/* Main Content - Stack on mobile, two columns on desktop */}
+        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-6 md:gap-8 mt-6 md:mt-8">
+          {/* Date Display - First on mobile */}
           <div className="lg:col-span-2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <DateDisplay date={currentDate} />
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-4 md:mt-6 flex justify-center">
               <WeekBadge
                 weekType={weekType}
                 onClick={() => setIsDialogOpen(true)}
@@ -172,7 +172,7 @@ function App() {
             </div>
           </div>
 
-          {/* Right Column - Schedule */}
+          {/* Schedule - Second on mobile */}
           <div className="lg:col-span-3 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <Schedule
               schedule={getScheduleForDay()}

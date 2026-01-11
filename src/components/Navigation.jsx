@@ -1,32 +1,34 @@
 function Navigation({ onPrevious, onNext, onToday }) {
   return (
-    <div className="flex justify-center items-center gap-4 animate-fade-in">
+    <div className="flex justify-center items-center gap-2 md:gap-4 animate-fade-in">
       <button
         onClick={onPrevious}
-        className="btn-warm flex items-center gap-2"
+        className="btn-warm flex items-center gap-1 md:gap-2 text-sm md:text-base px-3 md:px-6"
         aria-label="Previous day"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
-        Yesterday
+        <span className="hidden sm:inline">Yesterday</span>
+        <span className="sm:hidden">Prev</span>
       </button>
 
       <button
         onClick={onToday}
-        className="btn-warm px-8 bg-gradient-to-r from-warm-coral to-warm-sunset text-white hover:from-warm-sunset hover:to-warm-coral"
+        className="btn-warm px-4 md:px-8 text-sm md:text-base bg-gradient-to-r from-warm-coral to-warm-sunset text-white hover:from-warm-sunset hover:to-warm-coral"
       >
-        <span className="mr-2">🏠</span>
+        <span className="mr-1 md:mr-2">🏠</span>
         Today
       </button>
 
       <button
         onClick={onNext}
-        className="btn-warm flex items-center gap-2"
+        className="btn-warm flex items-center gap-1 md:gap-2 text-sm md:text-base px-3 md:px-6"
         aria-label="Next day"
       >
-        Tomorrow
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span className="hidden sm:inline">Tomorrow</span>
+        <span className="sm:hidden">Next</span>
+        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>

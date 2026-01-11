@@ -10,25 +10,25 @@ function DateDisplay({ date }) {
   return (
     <div className="date-card text-center transform transition-all duration-500 hover:scale-105">
       {/* Year - Mini */}
-      <div className="text-sm font-body font-semibold text-gray-500 tracking-widest mb-4">
+      <div className="text-xs md:text-sm font-body font-semibold text-gray-500 tracking-widest mb-2 md:mb-4">
         {year}
       </div>
 
       {/* Date - Large */}
-      <div className="text-9xl font-display font-bold text-gradient-warm mb-4 animate-bounce-soft">
+      <div className="text-7xl md:text-9xl font-display font-bold text-gradient-warm mb-2 md:mb-4 animate-bounce-soft">
         {day}
       </div>
 
       {/* Month - Small */}
-      <div className="text-xl font-body font-bold text-gray-700 tracking-wide">
+      <div className="text-lg md:text-xl font-body font-bold text-gray-700 tracking-wide">
         {month}
       </div>
 
       {/* Decorative line */}
-      <div className="mt-6 flex items-center justify-center gap-2">
-        <div className="w-12 h-1 bg-gradient-to-r from-transparent via-warm-coral to-transparent rounded-full"></div>
-        <div className="text-2xl">✨</div>
-        <div className="w-12 h-1 bg-gradient-to-r from-transparent via-warm-coral to-transparent rounded-full"></div>
+      <div className="mt-4 md:mt-6 flex items-center justify-center gap-2">
+        <div className="w-8 md:w-12 h-1 bg-gradient-to-r from-transparent via-warm-coral to-transparent rounded-full"></div>
+        <div className="text-xl md:text-2xl">✨</div>
+        <div className="w-8 md:w-12 h-1 bg-gradient-to-r from-transparent via-warm-coral to-transparent rounded-full"></div>
       </div>
     </div>
   )

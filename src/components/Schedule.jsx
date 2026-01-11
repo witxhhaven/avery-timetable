@@ -15,15 +15,15 @@ function Schedule({ schedule, dayOfWeek }) {
   }
 
   return (
-    <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-warm border-4 border-warm-peach/40">
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-warm-peach/30">
-        <span className="text-3xl">📖</span>
-        <h2 className="text-3xl font-display font-bold text-gradient-warm">
+    <div className="bg-white/80 backdrop-blur-md rounded-3xl p-4 md:p-8 shadow-warm border-4 border-warm-peach/40">
+      <div className="flex items-center gap-3 mb-4 md:mb-6 pb-3 md:pb-4 border-b-2 border-warm-peach/30">
+        <span className="text-2xl md:text-3xl">📖</span>
+        <h2 className="text-2xl md:text-3xl font-display font-bold text-gradient-warm">
           {dayOfWeek}'s Schedule
         </h2>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-h-[600px] overflow-y-auto pr-2">
         {[...new Set(schedule.map(period => period.subject))].filter(subject => !subject.toLowerCase().includes('recess')).map((subject, index) => {
           const isSpecial = subject.includes('(')
           const hasRecess = subject.toLowerCase().includes('recess')
