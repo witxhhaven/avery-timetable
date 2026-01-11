@@ -54,7 +54,6 @@
 
   .schedule-item {
     @apply bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-3;
-    @apply border-2 border-warm-peach/30 shadow-soft;
   }
 
   .date-card {

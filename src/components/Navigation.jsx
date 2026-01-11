@@ -9,8 +9,7 @@ function Navigation({ onPrevious, onNext, onToday }) {
         <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
-        <span className="hidden sm:inline">Yesterday</span>
-        <span className="sm:hidden">Prev</span>
+        Previous
       </button>
 
       <button
@@ -26,8 +25,7 @@ function Navigation({ onPrevious, onNext, onToday }) {
         className="btn-warm flex items-center gap-1 md:gap-2 text-sm md:text-base px-3 md:px-6"
         aria-label="Next day"
       >
-        <span className="hidden sm:inline">Tomorrow</span>
-        <span className="sm:hidden">Next</span>
+        Next
         <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
