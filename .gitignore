@@ -9,6 +9,9 @@ build/
 .env
 .env.local
 
+# Data files
+data/calendar-config.json
+
 # OS files
 .DS_Store
 Thumbs.db

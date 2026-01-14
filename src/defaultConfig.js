@@ -54,7 +54,7 @@ export const defaultConfig = {
         { "time": "9:05 - 9:35", "subject": "Recess" },
         { "time": "9:35 - 10:05", "subject": "PAL" },
         { "time": "10:05 - 10:35", "subject": "PAL" },
-        { "time": "10:35 - 11:05", "subject": "Mother Tongue (spelling)" },
+        { "time": "10:35 - 11:05", "subject": "Mother Tongue (Spelling)" },
         { "time": "11:05 - 11:35", "subject": "Mother Tongue" },
         { "time": "11:35 - 12:05", "subject": "Mother Tongue" },
         { "time": "12:05 - 12:35", "subject": "PE" },
