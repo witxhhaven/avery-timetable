@@ -122,7 +122,7 @@ export const defaultConfig = {
       "Thursday": [
         { "time": "7:35 - 8:05", "subject": "Math" },
         { "time": "8:05 - 8:35", "subject": "Math" },
-        { "time": "8:35 - 9:05", "subject": "Mother Tongue" },
+        { "time": "8:35 - 9:05", "subject": "Mother Tongue (Spelling)" },
         { "time": "9:05 - 9:35", "subject": "Mother Tongue" },
         { "time": "9:35 - 10:05", "subject": "Mother Tongue" },
         { "time": "10:05 - 10:35", "subject": "Recess" },
