@@ -1,22 +1,20 @@
-# 🌅 Avery School Calendar
+# Avery School Calendar
 
 A warm, student-friendly school calendar application with even/odd week tracking and daily schedule display.
 
 ## Features
 
 - **Beautiful Design**: Warm sunrise-inspired colors and friendly typography
-- **Week Tracking**: Automatic even/odd week calculation based on reference date
+- **Week Tracking**: School week numbers (Week 1-52) with even/odd week display
 - **Daily Schedules**: View your complete schedule for each day
 - **Easy Navigation**: Previous day, next day, and today buttons
-- **Persistent Storage**: All changes saved to file (survives restarts)
-- **Weekend Detection**: Special display for Saturday and Sunday
+- **Weekend Display**: Shows day name on Saturdays and Sundays
 
 ## Tech Stack
 
 - **Frontend**: React + Vite + Tailwind CSS
-- **Backend**: Express.js (Node.js)
 - **Fonts**: Fredoka (display) + Nunito (body)
-- **Storage**: JSON file-based persistence
+- **Data**: Static JSON files (no backend required)
 
 ## Setup Instructions
 
@@ -32,10 +30,6 @@ npm install
 npm run dev
 ```
 
-This will start:
-- Frontend: http://localhost:3000
-- Backend: http://localhost:3001
-
 ### 3. Open in Browser
 
 Navigate to http://localhost:3000 to use the calendar!
@@ -47,39 +41,58 @@ avery-calendar/
 ├── src/
 │   ├── components/
 │   │   ├── DateDisplay.jsx      # Date display component
-│   │   ├── WeekBadge.jsx        # Even/Odd week indicator
+│   │   ├── WeekBadge.jsx        # Week type and number indicator
 │   │   ├── Navigation.jsx       # Navigation buttons
-│   │   ├── Schedule.jsx         # Daily schedule display
-│   │   └── EditWeekDialog.jsx   # Week type editor
+│   │   └── Schedule.jsx         # Daily schedule display
+│   ├── data/
+│   │   ├── schedules.json       # Timetables for odd/even weeks
+│   │   └── weeks-2026.json      # School week tracking (Week 1-52)
 │   ├── App.jsx                  # Main application
 │   ├── main.jsx                 # React entry point
 │   └── index.css                # Tailwind styles
-├── server/
-│   └── index.js                 # Express backend
-├── data/
-│   └── calendar-config.json     # Configuration storage
-├── intructions/
-│   └── calendar-config.json     # Default configuration
 └── index.html                   # HTML entry point
 ```
 
-## Configuration
+## Data Files
 
-The application uses `data/calendar-config.json` for storing:
-- Week settings (reference date and type)
-- Complete schedules for even and odd weeks
+### schedules.json
 
-### Week Calculation
+Contains the timetables for both odd and even weeks:
 
-The app calculates whether any date is an even or odd week based on:
-- A reference date (e.g., "2026-01-11")
-- The week type for that reference date (e.g., "even")
+```json
+{
+  "odd": {
+    "Monday": [
+      { "time": "7:35 - 8:05", "subject": "English" },
+      ...
+    ],
+    ...
+  },
+  "even": {
+    "Monday": [...],
+    ...
+  }
+}
+```
 
-It counts weeks between the current date and reference date to determine the week type.
+### weeks-2026.json
 
-### Editing Week Type
+Contains all 52 school weeks with their dates and types:
 
-Click on the week badge to open the edit dialog and manually set the week type for the current date. This updates the reference date and recalculates all future weeks.
+```json
+{
+  "year": 2026,
+  "startDate": "2026-01-05",
+  "weeks": [
+    { "date": "2026-01-05", "schoolWeek": 1, "weekType": "odd" },
+    { "date": "2026-01-12", "schoolWeek": 2, "weekType": "even" },
+    ...
+  ]
+}
+```
+
+- **Week 1** starts on January 5, 2026 (first Monday of the year)
+- Week types alternate: odd, even, odd, even...
 
 ## Design Philosophy
 
@@ -91,6 +104,14 @@ Click on the week badge to open the edit dialog and manually set the week type f
 - **Student-Focused**: Clear, easy-to-read layout with encouraging messages
 
 ## Customization
+
+### Updating Schedules
+
+Edit `src/data/schedules.json` to change the timetable for any day.
+
+### Updating Week Types
+
+Edit `src/data/weeks-2026.json` to adjust which weeks are odd/even.
 
 ### Colors
 
@@ -124,19 +145,10 @@ fontFamily: {
 - Firefox (latest)
 - Safari (latest)
 
-## Future Enhancements
-
-- Dark mode support
-- Print schedule functionality
-- Mobile app version
-- Multi-user support
-- Cloud sync
-- Homework tracking
-
 ## License
 
 Private educational use.
 
 ---
 
-Made with 💖 for students everywhere!
+Made with love for students everywhere!
