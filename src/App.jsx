@@ -1,74 +1,35 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import DateDisplay from './components/DateDisplay'
 import WeekBadge from './components/WeekBadge'
 import Navigation from './components/Navigation'
 import Schedule from './components/Schedule'
-import EditWeekDialog from './components/EditWeekDialog'
-import { defaultConfig } from './defaultConfig'
+import schedules from './data/schedules.json'
+import weeksData from './data/weeks-2026.json'
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date())
-  const [config, setConfig] = useState(null)
-  const [weekType, setWeekType] = useState('even')
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
 
-  // Load config on mount
-  useEffect(() => {
-    fetchConfig()
-  }, [])
-
-  // Calculate week type when date or config changes
-  useEffect(() => {
-    if (config) {
-      const calculatedWeekType = calculateWeekType(currentDate, config.weekSettings)
-      setWeekType(calculatedWeekType)
-    }
-  }, [currentDate, config])
-
-  const fetchConfig = async () => {
-    try {
-      const response = await fetch('/api/config')
-      const data = await response.json()
-      setConfig(data)
-      setIsLoading(false)
-    } catch (error) {
-      console.error('Error loading config from API, using localStorage fallback:', error)
-      // Fallback to localStorage for GitHub Pages
-      const savedConfig = localStorage.getItem('calendar-config')
-      if (savedConfig) {
-        setConfig(JSON.parse(savedConfig))
-      } else {
-        // Use default config if nothing is saved
-        setConfig(defaultConfig)
-        localStorage.setItem('calendar-config', JSON.stringify(defaultConfig))
-      }
-      setIsLoading(false)
-    }
-  }
-
-  const calculateWeekType = (date, weekSettings) => {
-    // Get the start of the week (Sunday) for both dates
-    const getWeekStart = (d) => {
-      const date = new Date(d)
-      const day = date.getDay()
-      const diff = date.getDate() - day
-      return new Date(date.setDate(diff))
+  // Get week info (schoolWeek and weekType) from JSON data
+  const getWeekInfo = (date) => {
+    // Get the Monday of the current week
+    const getWeekMonday = (d) => {
+      const dateObj = new Date(d)
+      const day = dateObj.getDay()
+      // If Sunday (0), go back 6 days; otherwise go back (day - 1) days
+      const diff = day === 0 ? -6 : 1 - day
+      dateObj.setDate(dateObj.getDate() + diff)
+      return dateObj.toISOString().split('T')[0]
     }
 
-    const currentWeekStart = getWeekStart(date)
-    const referenceWeekStart = getWeekStart(new Date(weekSettings.referenceDate))
+    const mondayOfWeek = getWeekMonday(date)
+    const weekEntry = weeksData.weeks.find(w => w.date === mondayOfWeek)
 
-    // Calculate weeks difference
-    const diffTime = currentWeekStart - referenceWeekStart
-    const diffWeeks = Math.round(diffTime / (7 * 24 * 60 * 60 * 1000))
-
-    // If even number of weeks passed, same type; if odd, opposite type
-    if (Math.abs(diffWeeks) % 2 === 0) {
-      return weekSettings.weekType
-    } else {
-      return weekSettings.weekType === 'even' ? 'odd' : 'even'
+    if (weekEntry) {
+      return { schoolWeek: weekEntry.schoolWeek, weekType: weekEntry.weekType }
     }
+
+    // Fallback for dates outside 2026
+    return { schoolWeek: null, weekType: 'odd' }
   }
 
   const handlePreviousDay = () => {
@@ -87,44 +48,12 @@ function App() {
     setCurrentDate(new Date())
   }
 
-  const handleSaveWeekType = async (newWeekType) => {
-    const updatedConfig = {
-      ...config,
-      weekSettings: {
-        referenceDate: currentDate.toISOString().split('T')[0],
-        weekType: newWeekType
-      }
-    }
-
-    try {
-      await fetch('/api/config', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedConfig),
-      })
-      setConfig(updatedConfig)
-      setWeekType(newWeekType)
-      setIsDialogOpen(false)
-    } catch (error) {
-      console.error('Error saving config to API, using localStorage fallback:', error)
-      // Fallback to localStorage for GitHub Pages
-      localStorage.setItem('calendar-config', JSON.stringify(updatedConfig))
-      setConfig(updatedConfig)
-      setWeekType(newWeekType)
-      setIsDialogOpen(false)
-    }
-  }
-
   const getDayOfWeek = (date) => {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     return days[date.getDay()]
   }
 
   const getScheduleForDay = () => {
-    if (!config) return []
-
     const dayName = getDayOfWeek(currentDate)
 
     // Weekend handling
@@ -132,18 +61,8 @@ function App() {
       return null
     }
 
-    return config.schedules[weekType]?.[dayName] || []
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center animate-fade-in">
-          <div className="text-6xl font-display text-gradient-warm mb-4">✨</div>
-          <p className="text-2xl font-display text-warm-coral">Loading your schedule...</p>
-        </div>
-      </div>
-    )
+    const { weekType } = getWeekInfo(currentDate)
+    return schedules[weekType]?.[dayName] || []
   }
 
   return (
@@ -177,8 +96,8 @@ function App() {
 
             <div className="mt-4 md:mt-6 flex justify-center">
               <WeekBadge
-                weekType={weekType}
-                onClick={() => setIsDialogOpen(true)}
+                weekType={getWeekInfo(currentDate).weekType}
+                schoolWeek={getWeekInfo(currentDate).schoolWeek}
               />
             </div>
           </div>
@@ -194,13 +113,6 @@ function App() {
         </div>
       </div>
 
-      {/* Edit Dialog */}
-      <EditWeekDialog
-        isOpen={isDialogOpen}
-        currentWeekType={weekType}
-        onSave={handleSaveWeekType}
-        onCancel={() => setIsDialogOpen(false)}
-      />
     </div>
   )
 }

@@ -41,14 +41,12 @@
   .badge-even {
     @apply bg-gradient-to-r from-warm-coral to-warm-sunset text-white;
     @apply px-4 md:px-6 py-2 md:py-3 rounded-full font-display font-semibold shadow-warm;
-    @apply cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105;
     @apply text-sm md:text-base;
   }
 
   .badge-odd {
     @apply bg-gradient-to-r from-warm-amber to-warm-honey text-gray-800;
     @apply px-4 md:px-6 py-2 md:py-3 rounded-full font-display font-semibold shadow-warm;
-    @apply cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105;
     @apply text-sm md:text-base;
   }
 

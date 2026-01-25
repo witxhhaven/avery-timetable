@@ -18,10 +18,10 @@ function Schedule({ schedule, dayOfWeek, currentDate }) {
       <div className="bg-white/80 backdrop-blur-md rounded-3xl p-12 shadow-warm border-4 border-warm-amber/40 text-center">
         <div className="text-6xl mb-6 animate-bounce-soft">🎉</div>
         <h2 className="text-4xl font-display font-bold text-gradient-sunny mb-4">
-          No School Today!
+          {dayOfWeek}
         </h2>
         <p className="text-xl font-body text-gray-600">
-          Enjoy your weekend! Time to relax and have fun! 🌈
+          No school today! Enjoy your weekend! 🌈
         </p>
       </div>
     )
