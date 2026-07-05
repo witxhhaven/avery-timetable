@@ -88,8 +88,8 @@
     ],
     "Tuesday": [
       { "time": "7:35 - 8:05", "subject": "PE" },
-      { "time": "8:05 - 8:35", "subject": "English (Spelling)" },
-      { "time": "8:35 - 9:05", "subject": "English" },
+      { "time": "8:05 - 8:35", "subject": "PE" },
+      { "time": "8:35 - 9:05", "subject": "English (Spelling)" },
       { "time": "9:05 - 9:35", "subject": "English" },
       { "time": "9:35 - 10:05", "subject": "English" },
       { "time": "10:05 - 10:35", "subject": "Recess" },
@@ -109,10 +109,10 @@
       { "time": "10:05 - 10:35", "subject": "Recess" },
       { "time": "10:35 - 11:05", "subject": "Art" },
       { "time": "11:05 - 11:35", "subject": "Art" },
-      { "time": "11:35 - 12:05", "subject": "PE" },
-      { "time": "12:05 - 12:35", "subject": "PE" },
+      { "time": "11:35 - 12:05", "subject": "English" },
+      { "time": "12:05 - 12:35", "subject": "English" },
       { "time": "12:35 - 1:05", "subject": "English" },
-      { "time": "1:05 - 1:35", "subject": "English" }
+      { "time": "1:05 - 1:35", "subject": "PE" }
     ],
     "Thursday": [
       { "time": "7:35 - 8:05", "subject": "Math" },
