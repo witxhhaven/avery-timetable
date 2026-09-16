@@ -25,11 +25,11 @@ function App() {
     const weekEntry = weeksData.weeks.find(w => w.date === mondayOfWeek)
 
     if (weekEntry) {
-      return { schoolWeek: weekEntry.schoolWeek, weekType: weekEntry.weekType }
+      return { schoolWeek: weekEntry.schoolWeek, weekType: weekEntry.weekType, noSchool: !!weekEntry.noSchool }
     }
 
     // Fallback for dates outside 2026
-    return { schoolWeek: null, weekType: 'odd' }
+    return { schoolWeek: null, weekType: 'odd', noSchool: false }
   }
 
   const handlePreviousDay = () => {
@@ -61,8 +61,19 @@ function App() {
       return null
     }
 
-    const { weekType } = getWeekInfo(currentDate)
+    const { weekType, noSchool } = getWeekInfo(currentDate)
+    if (noSchool) {
+      return null
+    }
     return schedules[weekType]?.[dayName] || []
+  }
+
+  const getNoSchoolReason = () => {
+    const dayName = getDayOfWeek(currentDate)
+    if (dayName === 'Saturday' || dayName === 'Sunday') {
+      return 'weekend'
+    }
+    return getWeekInfo(currentDate).noSchool ? 'holiday' : null
   }
 
   return (
@@ -106,6 +117,7 @@ function App() {
           <div className="lg:col-span-3 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <Schedule
               schedule={getScheduleForDay()}
+              noSchoolReason={getNoSchoolReason()}
               dayOfWeek={getDayOfWeek(currentDate)}
               currentDate={currentDate}
             />

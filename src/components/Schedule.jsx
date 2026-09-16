@@ -1,6 +1,6 @@
 import motivationalMessages from '../motivationalMessages.json'
 
-function Schedule({ schedule, dayOfWeek, currentDate }) {
+function Schedule({ schedule, noSchoolReason, dayOfWeek, currentDate }) {
   // Calculate day of year
   const getDayOfYear = (date) => {
     const start = new Date(date.getFullYear(), 0, 0)
@@ -12,16 +12,17 @@ function Schedule({ schedule, dayOfWeek, currentDate }) {
   const dayOfYear = getDayOfYear(currentDate)
   const messageIndex = dayOfYear % 50
   const dailyMessage = motivationalMessages[messageIndex]
-  // Weekend handling
+  // Weekend / holiday handling
   if (!schedule) {
+    const isHoliday = noSchoolReason === 'holiday'
     return (
       <div className="bg-white/80 backdrop-blur-md rounded-3xl p-12 shadow-warm border-4 border-warm-amber/40 text-center">
-        <div className="text-6xl mb-6 animate-bounce-soft">🎉</div>
+        <div className="text-6xl mb-6 animate-bounce-soft">{isHoliday ? '🍂' : '🎉'}</div>
         <h2 className="text-4xl font-display font-bold text-gradient-sunny mb-4">
           {dayOfWeek}
         </h2>
         <p className="text-xl font-body text-gray-600">
-          No school today! Enjoy your weekend! 🌈
+          {isHoliday ? 'No school today! Enjoy the break! 🍂' : 'No school today! Enjoy your weekend! 🌈'}
         </p>
       </div>
     )
